@@ -1,43 +1,48 @@
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-
-const usuarios = ref([]);
-const mensaje = ref('');
-const usuarioSeleccionado = ref(null);
-
-onMounted(async () => {
-  const respuesta = await fetch('http://localhost:5000/api/usuarios');
-  usuarios.value = await respuesta.json();
-});
-
-function seleccionarUsuario(usuario) {
-  usuarioSeleccionado.value = usuario;
-}
-function esperar(segundos) {
-  return new Promise((resolve) => {
-    const temporizador = setTimeout(() => resolve(), segundos);
-  });
-}
-
-async function onChange(usuario) {
-  mensaje.value = 'Actualizando la base de datos...';
-  // Esperar 2 segundos para apreciar la reactividad.
-  // Eliminarlo para verlo en tiempo real.
-  await esperar(2000);
-  const respuesta = await fetch(
-    `http://localhost:5000/api/usuarios/${usuario.id}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ esAdmin: usuario.esAdmin }),
-    }
-  );
-  mensaje.value = 'Base de datos actualizada.';
-  await esperar(2000);
-  mensaje.value = '';
-}
+<script>
+export default {
+  name: 'App',
+  async mounted() {
+    alert('mounted');
+      const respuesta = await fetch('http://localhost:5000/api/usuarios');
+    this.usuarios = await respuesta.json();
+  },
+  data() {
+    return {
+      usuarios: [],
+      usuarioSeleccionado: null,
+      mensaje: '',
+    };
+  },
+  methods: {
+    seleccionarUsuario(usuario) {
+      this.usuarioSeleccionado = usuario;
+    },
+    esperar(segundos) {
+      return new Promise((resolve) => {
+        setTimeout(() => resolve(), segundos);
+      });
+    },
+    async onChange(usuario) {
+      this.mensaje = 'Actualizando la base de datos...';
+      // Esperar 2 segundos para apreciar la reactividad.
+      // Eliminarlo para verlo en tiempo real.
+      await this.esperar(2000);
+      const respuesta = await fetch(
+        `http://localhost:5000/api/usuarios/${usuario.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ esAdmin: usuario.esAdmin }),
+        }
+      );
+      this.mensaje = 'Base de datos actualizada.';
+      await this.esperar(2000);
+      this.mensaje = '';
+    },
+  },
+};
 </script>
 
 <template>

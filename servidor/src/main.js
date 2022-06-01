@@ -1,21 +1,14 @@
-import express, { Application, Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 
 let listo = false;
-const app: Application = express();
+const app = express();
 app.use(express.json());
 app.use(cors({}));
 
-interface Usuario {
-  nombre: string;
-  email: string;
-  id: string;
-  esAdmin?: boolean;
-}
-
 app.use(express.static('public'));
 
-const usuarios: Usuario[] = [
+const usuarios = [
   {
     nombre: 'Vue',
     id: '213912382193',
@@ -48,15 +41,15 @@ const usuarios: Usuario[] = [
   },
 ];
 
-app.get('/api', (req: Request, res: Response) => {
+app.get('/api', (req, res) => {
   res.send({
     listo,
   });
 });
 
-app.get('/api/usuarios/:id', (req: Request, res: Response) => {
+app.get('/api/usuarios/:id', (req, res) => {
   const { id } = req.params;
-  const usuario: Usuario | undefined = usuarios.find((item) => item.id === id);
+  const usuario = usuarios.find((item) => item.id === id);
   if (usuario) {
     return res.status(200).send(usuario);
   } else {
@@ -64,15 +57,15 @@ app.get('/api/usuarios/:id', (req: Request, res: Response) => {
   }
 });
 
-app.get('/api/usuarios', (req: Request, res: Response) => {
+app.get('/api/usuarios', (req, res) => {
   res.send(usuarios);
 });
 
-app.put('/api/usuarios/:id', (req: Request, res: Response) => {
+app.put('/api/usuarios/:id', (req, res) => {
   const { id } = req.params;
   console.log(`ID: ${id}`);
   const body = req.body;
-  const usuario: Usuario | undefined = usuarios.find((item) => item.id === id);
+  const Usuario = usuarios.find((item) => item.id === id);
 
   if (usuario) {
     const index = usuarios.indexOf(usuario);
