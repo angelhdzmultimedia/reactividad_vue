@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Usuario } from './models/Usuario';
-import { logger } from 'sequelize/types/utils/logger';
+import { Usuario } from './models/usuario/index.js';
 
 let listo = false;
 const app = express();
@@ -83,9 +82,9 @@ app.put('/api/usuarios/:id', (req, res) => {
 app.listen(5000, async () => {
   listo = true;
   console.log('Servidor esta escuchando en puerto 5000...');
-  const result = await Usuario.findOne({
+  const usuario = await Usuario.findOne({
     where: { nombre: 'Angel' },
   });
 
-  logger.inspect(result);
+  console.log(usuario);
 });

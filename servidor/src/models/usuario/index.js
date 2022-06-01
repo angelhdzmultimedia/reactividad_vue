@@ -23,4 +23,6 @@ Usuario.init(
   }
 );
 
+Usuario.sync();
+
 export { Usuario };
