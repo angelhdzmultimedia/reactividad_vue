@@ -6,8 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(cors({}));
 
-app.use(express.static('public'));
-
 const usuarios = [
   {
     nombre: 'Vue',
@@ -65,7 +63,7 @@ app.put('/api/usuarios/:id', (req, res) => {
   const { id } = req.params;
   console.log(`ID: ${id}`);
   const body = req.body;
-  const Usuario = usuarios.find((item) => item.id === id);
+  const usuario = usuarios.find((item) => item.id === id);
 
   if (usuario) {
     const index = usuarios.indexOf(usuario);

@@ -1,0 +1,42 @@
+<span style="color: green"> {{ mensaje }}</span>
+<h3>Usuarios</h3>
+<ul class="lista">
+  <li
+    @click="seleccionarUsuario(usuario)"
+    class="usuario"
+    v-for="usuario in usuarios"
+    :key="usuario.id"
+  >
+    <span> {{ usuario.nombre }} </span>
+    <span>{{ usuario.email }}</span>
+
+    <div class="acciones">
+      <label>Admin</label>
+      <input
+        @change="onChange(usuario)"
+        v-model="usuario.esAdmin"
+        type="checkbox"
+      />
+    </div>
+  </li>
+</ul>
+<div class="usuario-seleccionado">
+  <h3>Usuario Seleccionado</h3>
+  <span v-if="!usuarioSeleccionado">No hay un usuario seleccionado.</span>
+  <li class="usuario" v-if="usuarioSeleccionado !== null">
+    <span> {{ usuarioSeleccionado.nombre }} </span>
+    <span>{{ usuarioSeleccionado.email }}</span>
+
+    <div class="acciones">
+      <label>Admin</label>
+      <input
+        @change="onChange(usuarioSeleccionado)"
+        v-model="usuarioSeleccionado.esAdmin"
+        type="checkbox"
+      />
+    </div>
+  </li>
+  <button @click="usuarioSeleccionado = null" :disabled="!usuarioSeleccionado">
+    Deseleccionar
+  </button>
+</div>
