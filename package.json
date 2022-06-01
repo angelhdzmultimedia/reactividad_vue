@@ -4,7 +4,7 @@
   "scripts": {
     "start:servidor": "ts-node-dev --respawn src/main.ts",
     "start:cliente": "cd cliente && npm install && npm run devs",
-    "dev": "npm install && npm run start:servidor && ts-node-dev src/levantar_client.ts"
+    "dev": "npm install && ts-node-dev src/levantar_client.ts && npm run start:servidor"
   },
   "dependencies": {
     "concurrently": "^7.2.1",
