@@ -1,9 +1,9 @@
 <span style="color: green"> {{ mensaje }}</span>
 <h3>Usuarios</h3>
-<ul class="lista">
+<ul class="lista columna">
   <li
     @click="seleccionarUsuario(usuario)"
-    class="usuario"
+    class="usuario fila"
     v-for="usuario in usuarios"
     :key="usuario.id"
   >
@@ -20,7 +20,7 @@
     </div>
   </li>
 </ul>
-<div class="usuario-seleccionado">
+<div class="usuario-seleccionado columna">
   <h3>Usuario Seleccionado</h3>
   <span v-if="!usuarioSeleccionado">No hay un usuario seleccionado.</span>
   <li class="usuario" v-if="usuarioSeleccionado !== null">
@@ -39,4 +39,14 @@
   <button @click="usuarioSeleccionado = null" :disabled="!usuarioSeleccionado">
     Deseleccionar
   </button>
+</div>
+<div class="crear-usuario columna">
+  <h3>Crear Usuario</h3>
+  <input v-model="campoUsuario.nombre" placeholder="Nombre" />
+  <input v-model="campoUsuario.email" placeholder="Email" />
+  <div class="fila">
+    <label>Admin</label>
+    <input type="checkbox" v-model="campoUsuario.admin" placeholder="Admin" />
+  </div>
+  <button @click="crearUsuario">Crear</button>
 </div>

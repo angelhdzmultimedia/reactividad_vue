@@ -7,48 +7,20 @@ const app = express();
 app.use(express.json());
 app.use(cors({}));
 
-const usuarios = [
-  {
-    nombre: 'Vue',
-    id: '213912382193',
-    email: 'vue@gmail.com',
-    esAdmin: false,
-  },
-  {
-    nombre: 'TypeScript',
-    id: '435347574',
-    email: 'typescript@gmail.com',
-    esAdmin: false,
-  },
-  {
-    nombre: 'Pinia',
-    id: '3242384023',
-    email: 'pinia@gmail.com',
-    esAdmin: false,
-  },
-  {
-    nombre: 'Express',
-    id: '82883933',
-    email: 'express@gmail.com',
-    esAdmin: false,
-  },
-  {
-    nombre: 'Mongoose',
-    id: '435345345',
-    email: 'mongoose@gmail.com',
-    esAdmin: false,
-  },
-];
+async function middleware(req, res, next) {
+  await Usuario.sync();
+  next();
+}
 
-app.get('/api', (req, res) => {
+app.get('/api', [middleware], (req, res) => {
   res.send({
     listo,
   });
 });
 
-app.get('/api/usuarios/:id', (req, res) => {
+app.get('/api/usuarios/:id', [middleware], async (req, res) => {
   const { id } = req.params;
-  const usuario = usuarios.find((item) => item.id === id);
+  const usuario = await Usuario.findOne({ where: { id } });
   if (usuario) {
     return res.status(200).send(usuario);
   } else {
@@ -56,24 +28,29 @@ app.get('/api/usuarios/:id', (req, res) => {
   }
 });
 
-app.get('/api/usuarios', (req, res) => {
+app.post('/api/usuarios', [middleware], async (req, res) => {
+  const body = req.body;
+  const usuario = await Usuario.create(body);
+  if (usuario) {
+    return res.status(200).send(usuario);
+  }
+  return res.status(400).send('No se pudo crear usuario.');
+});
+
+app.get('/api/usuarios', [middleware], async (req, res) => {
+  const usuarios = await Usuario.findAll();
   res.send(usuarios);
 });
 
-app.put('/api/usuarios/:id', (req, res) => {
+app.put('/api/usuarios/:id', [middleware], async (req, res) => {
   const { id } = req.params;
   console.log(`ID: ${id}`);
   const body = req.body;
-  const usuario = usuarios.find((item) => item.id === id);
+  const usuario = await Usuario.find({ where: { id } });
 
   if (usuario) {
-    const index = usuarios.indexOf(usuario);
-
-    usuarios[index] = {
-      ...usuario,
-      ...body,
-    };
-    return res.status(200).send(usuarios[index]);
+    const usuarioActualizado = await usuario.update(body);
+    return res.status(200).send(usuarioActualizado);
   } else {
     return res.status(404).send('Usuario no encontrado.');
   }
@@ -82,14 +59,4 @@ app.put('/api/usuarios/:id', (req, res) => {
 app.listen(5000, async () => {
   listo = true;
   console.log('Servidor esta escuchando en puerto 5000...');
-  await Usuario.sync();
-  await Usuario.create({
-    nombre: 'Angel',
-    email: 'angel@live.com',
-  });
-  const usuario = await Usuario.findOne({
-    where: { nombre: 'Angel' },
-  });
-
-  console.log(usuario.toJSON());
 });

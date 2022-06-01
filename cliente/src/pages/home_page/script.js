@@ -1,4 +1,9 @@
-import { onChange, seleccionarUsuario, onHomePageMounted } from './composables';
+import {
+  onChange,
+  seleccionarUsuario,
+  onHomePageMounted,
+  crearUsuario,
+} from './composables';
 
 export default {
   name: 'HomePage',
@@ -7,14 +12,20 @@ export default {
   },
   data() {
     return {
-      onHomePageMounted,
       usuarios: [],
       usuarioSeleccionado: null,
       mensaje: '',
+      campoUsuario: {
+        nombre: '',
+        email: '',
+        admin: false,
+      },
     };
   },
   methods: {
+    onHomePageMounted,
     onChange,
     seleccionarUsuario,
+    crearUsuario,
   },
 };
