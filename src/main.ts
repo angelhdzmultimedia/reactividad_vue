@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 
+let listo = false;
 const app: Application = express();
 app.use(express.json());
 app.use(cors({}));
@@ -47,6 +48,12 @@ const usuarios: Usuario[] = [
   },
 ];
 
+app.get('/api', (req: Request, res: Response) => {
+  res.send({
+    listo,
+  });
+});
+
 app.get('/api/usuarios/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   const usuario: Usuario | undefined = usuarios.find((item) => item.id === id);
@@ -81,5 +88,6 @@ app.put('/api/usuarios/:id', (req: Request, res: Response) => {
 });
 
 app.listen(5000, () => {
+  listo = true;
   console.log('Servidor esta escuchando en puerto 5000...');
 });
