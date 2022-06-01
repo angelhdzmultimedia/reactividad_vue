@@ -9,7 +9,7 @@ app.use(cors({}));
 
 async function middleware(req, res, next) {
   await Usuario.sync();
-  next();
+  setTimeout(() => next(), 1000);
 }
 
 app.get('/api', [middleware], (req, res) => {
