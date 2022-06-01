@@ -82,6 +82,7 @@ app.put('/api/usuarios/:id', (req, res) => {
 app.listen(5000, async () => {
   listo = true;
   console.log('Servidor esta escuchando en puerto 5000...');
+
   const usuario = await Usuario.findOne({
     where: { nombre: 'Angel' },
   });

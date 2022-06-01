@@ -3,7 +3,7 @@
   "name": "node-starter",
   "version": "0.0.0",
   "scripts": {
-    "start:servidor": "nodemon servidor/src/main.js",
+    "start:servidor": "node servidor/src/main.js",
     "start:cliente": "cd cliente && npm install && npm run dev",
     "connect:cliente": "node start_cliente.js",
     "dev": "npm install &&  concurrently \"npm run start:servidor\" \"npm run connect:cliente\""

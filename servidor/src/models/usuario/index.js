@@ -2,7 +2,7 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'db.sqlite',
+  storage: 'db2.sqlite',
 });
 
 class Usuario extends Model {}
