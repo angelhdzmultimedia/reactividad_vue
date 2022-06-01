@@ -91,5 +91,5 @@ app.listen(5000, async () => {
     where: { nombre: 'Angel' },
   });
 
-  console.log(usuario);
+  console.log(usuario.toJSON());
 });
