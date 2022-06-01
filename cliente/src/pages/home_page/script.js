@@ -10,6 +10,9 @@ export default {
   async mounted() {
     this.onHomePageMounted();
   },
+  created() {
+    this.campoUsuario = this.campoUsuarioDefault;
+  },
   data() {
     return {
       usuarios: [],
@@ -20,7 +23,7 @@ export default {
         email: '',
         admin: false,
       },
-      campoUsuario: this.campoUsuarioDefault,
+      campoUsuario: null,
     };
   },
   methods: {
