@@ -2,7 +2,7 @@
   "name": "node-starter",
   "version": "0.0.0",
   "scripts": {
-    "start:servidor": "ts-node-dev --respawn src/main.ts",
+    "start:servidor": "ts-node-dev --respawn servidor/src/main.ts",
     "start:cliente": "cd cliente && npm install && npm run dev",
     "connect:cliente": "node start_cliente.mjs",
     "dev": "npm install &&  concurrently \"npm run start:servidor\" \"npm run connect:cliente\""
