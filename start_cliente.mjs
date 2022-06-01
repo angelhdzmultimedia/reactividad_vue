@@ -8,7 +8,7 @@ const temporizador = setInterval(async () => {
     if (datos.listo) {
       console.log('Levantando cliente...');
       clearInterval(temporizador);
-      exec('npm run connect:cliente');
+      exec('npm run start:cliente');
     }
   } catch (error) {
     // Ignorar
