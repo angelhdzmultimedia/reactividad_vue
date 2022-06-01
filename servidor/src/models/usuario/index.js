@@ -2,7 +2,7 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'db2.sqlite',
+  storage: 'db3.sqlite',
 });
 
 class Usuario extends Model {}
@@ -22,7 +22,5 @@ Usuario.init(
     modelName: 'Usuario',
   }
 );
-
-Usuario.sync();
 
 export { Usuario };
