@@ -22,6 +22,10 @@ Usuario.init(
     email: {
       type: DataTypes.STRING,
     },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize: db,
