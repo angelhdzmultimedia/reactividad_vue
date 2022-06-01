@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Usuario } from './models/usuario/index.js';
+import { Usuario, db } from './models/usuario/index.js';
 
 let listo = false;
 const app = express();

@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
-const sequelize = new Sequelize({
+export const db = new Sequelize('crudDB', 'admin', '123456', {
   dialect: 'sqlite',
   storage: 'db3.sqlite',
 });
@@ -18,7 +18,7 @@ Usuario.init(
     },
   },
   {
-    sequelize,
+    sequelize: db,
     modelName: 'Usuario',
   }
 );
