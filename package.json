@@ -4,8 +4,8 @@
   "scripts": {
     "start:servidor": "ts-node-dev --respawn src/main.ts",
     "start:cliente": "cd cliente && npm install && npm run dev",
-    "loop:cliente": "node src/levantar_cliente.mjs",
-    "dev": "npm install &&  concurrently \"npm run start:servidor\" \"npm run loop:cliente\""
+    "connect:cliente": "node levantar_cliente.mjs",
+    "dev": "npm install &&  concurrently \"npm run start:servidor\" \"npm run conectar:cliente\""
   },
   "dependencies": {
     "concurrently": "^7.2.1",
