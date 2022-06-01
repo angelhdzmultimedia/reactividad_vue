@@ -15,11 +15,12 @@ export default {
       usuarios: [],
       usuarioSeleccionado: null,
       mensaje: '',
-      campoUsuario: {
+      campoUsuarioDefault: {
         nombre: '',
         email: '',
         admin: false,
       },
+      campoUsuario: this.campoUsuarioDefault,
     };
   },
   methods: {

@@ -15,4 +15,6 @@ export async function crearUsuario() {
   } else {
     alert(error);
   }
+
+  this.campoUsuario = this.campoUsuarioDefault
 }
