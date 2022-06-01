@@ -1,8 +1,15 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
 export const db = new Sequelize('crudDB', 'admin', '123456', {
+  host: 'localhost',
   dialect: 'sqlite',
-  storage: 'db3.sqlite',
+  storage: 'db.sqlite',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 3000,
+    idle: 1000,
+  },
 });
 
 class Usuario extends Model {}
