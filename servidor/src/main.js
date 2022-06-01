@@ -83,6 +83,10 @@ app.listen(5000, async () => {
   listo = true;
   console.log('Servidor esta escuchando en puerto 5000...');
   await Usuario.sync();
+  await Usuario.create({
+    nombre: 'Angel',
+    email: 'angel@live.com',
+  });
   const usuario = await Usuario.findOne({
     where: { nombre: 'Angel' },
   });
